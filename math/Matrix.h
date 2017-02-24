@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef SIMPLE_ENGINE_MATRIX_H
+#define SIMPLE_ENGINE_MATRIX_H
 
 #include<string>
 
@@ -100,15 +100,15 @@ namespace SimpleEngine {
 			m22 = m21 * _other.m12 + m22 * _other.m22;
 		}
 
-		float determinant() const
+		float Determinant() const
 		{
 			return m11 * m22 - m12 * m21;
 		}
 
-		Mat2 getInverses() const
+		Mat2 GetInverses() const
 		{
 			Mat2 m;
-			float det = determinant();
+			float det = Determinant();
 			if (det != 0) {
 				float idet = 1.0f / det;
 				m.m11 = idet * m22;
@@ -120,6 +120,7 @@ namespace SimpleEngine {
 		}
 	};
 
+	class Mat4;
 	class Mat3
 	{
 	public:
@@ -266,26 +267,26 @@ namespace SimpleEngine {
 			m33 = m31 * _other.m13 + m32 * _other.m23 + m33 * _other.m33;
 		}
 
-		float determinant() const
+		float Determinant() const
 		{
 			return m11*(m22 * m33 - m32*m23) - m12*(m21*m33 - m31*m23) + m13*(m21*m32 - m31*m22);
 		}
 
-		Mat3 getInverses() const
+		Mat3 GetInverses() const
 		{
 			Mat3 m;
-			float det = determinant();
+			float det = Determinant();
 			if (det != 0) {
 				float idet = 1.0f / det;
-				m.m11 = Mat2(m22, m23, m32, m33).determinant() * idet;
-				m.m12 = -Mat2(m12, m13, m32, m33).determinant() * idet;
-				m.m13 = Mat2(m12, m13, m22, m23).determinant() * idet;
-				m.m21 = -Mat2(m21, m23, m31, m33).determinant() * idet;
-				m.m22 = Mat2(m11, m13, m31, m33).determinant() * idet;
-				m.m23 = -Mat2(m11, m13, m21, m23).determinant() * idet;
-				m.m31 = Mat2(m21, m22, m31, m32).determinant() * idet;
-				m.m32 = -Mat2(m11, m12, m31, m32).determinant() * idet;
-				m.m33 = Mat2(m11, m12, m21, m22).determinant() * idet;
+				m.m11 = Mat2(m22, m23, m32, m33).Determinant() * idet;
+				m.m12 = -Mat2(m12, m13, m32, m33).Determinant() * idet;
+				m.m13 = Mat2(m12, m13, m22, m23).Determinant() * idet;
+				m.m21 = -Mat2(m21, m23, m31, m33).Determinant() * idet;
+				m.m22 = Mat2(m11, m13, m31, m33).Determinant() * idet;
+				m.m23 = -Mat2(m11, m13, m21, m23).Determinant() * idet;
+				m.m31 = Mat2(m21, m22, m31, m32).Determinant() * idet;
+				m.m32 = -Mat2(m11, m12, m31, m32).Determinant() * idet;
+				m.m33 = Mat2(m11, m12, m21, m22).Determinant() * idet;
 			}
 			return m;
 		}
@@ -331,6 +332,29 @@ namespace SimpleEngine {
 			m31(_m31), m32(_m32), m33(_m33), m34(_m34),
 			m41(_m41), m42(_m42), m43(_m43), m44(_m44)
 		{}
+
+		Mat4(const Mat3& _m3)
+		{
+			m11 = _m3.m11;
+			m12 = _m3.m12;
+			m13 = _m3.m13;
+			m14 = 0;
+			
+			m21 = _m3.m21;
+			m22 = _m3.m22;
+			m23 = _m3.m23;
+			m24 = 0;
+				
+			m31 = _m3.m31;
+			m32 = _m3.m32;
+			m33 = _m3.m33;
+			m34 = 0;
+
+			m41 = 0;
+			m42 = 0;
+			m43 = 0;
+			m44 = 1;
+		}
 
 		Mat4 operator + (const Mat4& _other)
 		{
@@ -540,41 +564,41 @@ namespace SimpleEngine {
 			return m;
 		}
 
-		float determinant() const
+		float Determinant() const
 		{
 			float det = 0;
-			det += m11 * Mat3(m22, m23, m24, m32, m33, m34, m42, m43, m44).determinant(); // 1+1
-			det -= m12 * Mat3(m21, m23, m24, m31, m33, m34, m41, m43, m44).determinant(); // 1+2
-			det += m13 * Mat3(m21, m22, m24, m31, m32, m34, m41, m42, m44).determinant(); // 1+3
-			det -= m14 * Mat3(m21, m22, m23, m31, m32, m33, m41, m42, m43).determinant(); // 1+4
+			det += m11 * Mat3(m22, m23, m24, m32, m33, m34, m42, m43, m44).Determinant(); // 1+1
+			det -= m12 * Mat3(m21, m23, m24, m31, m33, m34, m41, m43, m44).Determinant(); // 1+2
+			det += m13 * Mat3(m21, m22, m24, m31, m32, m34, m41, m42, m44).Determinant(); // 1+3
+			det -= m14 * Mat3(m21, m22, m23, m31, m32, m33, m41, m42, m43).Determinant(); // 1+4
 			return det;
 		}
 
-		Mat4 getInverses() const
+		Mat4 GetInverses() const
 		{
 			Mat4 m;
-			float det = determinant();
+			float det = Determinant();
 			if (det != 0) {
 				float idet = 1.0f / det;
-				m.m11 = Mat3(m22, m23, m24, m32, m33, m34, m42, m43, m44).determinant() * idet;
-				m.m12 = -Mat3(m12, m13, m14, m32, m33, m34, m42, m43, m44).determinant() * idet;
-				m.m13 = Mat3(m12, m13, m14, m22, m23, m24, m42, m43, m44).determinant() * idet;
-				m.m14 = -Mat3(m12, m13, m14, m22, m23, m24, m32, m33, m34).determinant() * idet;
+				m.m11 = Mat3(m22, m23, m24, m32, m33, m34, m42, m43, m44).Determinant() * idet;
+				m.m12 = -Mat3(m12, m13, m14, m32, m33, m34, m42, m43, m44).Determinant() * idet;
+				m.m13 = Mat3(m12, m13, m14, m22, m23, m24, m42, m43, m44).Determinant() * idet;
+				m.m14 = -Mat3(m12, m13, m14, m22, m23, m24, m32, m33, m34).Determinant() * idet;
 
-				m.m21 = -Mat3(m21, m23, m24, m31, m33, m34, m41, m43, m44).determinant() * idet;
-				m.m22 = Mat3(m11, m13, m14, m31, m33, m34, m41, m43, m44).determinant() * idet;
-				m.m23 = -Mat3(m11, m13, m14, m21, m23, m24, m41, m43, m44).determinant() * idet;
-				m.m24 = Mat3(m11, m13, m14, m21, m23, m24, m31, m33, m34).determinant() * idet;
+				m.m21 = -Mat3(m21, m23, m24, m31, m33, m34, m41, m43, m44).Determinant() * idet;
+				m.m22 = Mat3(m11, m13, m14, m31, m33, m34, m41, m43, m44).Determinant() * idet;
+				m.m23 = -Mat3(m11, m13, m14, m21, m23, m24, m41, m43, m44).Determinant() * idet;
+				m.m24 = Mat3(m11, m13, m14, m21, m23, m24, m31, m33, m34).Determinant() * idet;
 
-				m.m31 = Mat3(m21, m22, m24, m31, m32, m34, m41, m42, m44).determinant() * idet;
-				m.m32 = -Mat3(m11, m12, m14, m31, m32, m34, m41, m42, m44).determinant() * idet;
-				m.m33 = Mat3(m11, m12, m14, m21, m22, m24, m41, m42, m44).determinant() * idet;
-				m.m34 = -Mat3(m11, m12, m14, m21, m22, m24, m31, m32, m34).determinant() * idet;
+				m.m31 = Mat3(m21, m22, m24, m31, m32, m34, m41, m42, m44).Determinant() * idet;
+				m.m32 = -Mat3(m11, m12, m14, m31, m32, m34, m41, m42, m44).Determinant() * idet;
+				m.m33 = Mat3(m11, m12, m14, m21, m22, m24, m41, m42, m44).Determinant() * idet;
+				m.m34 = -Mat3(m11, m12, m14, m21, m22, m24, m31, m32, m34).Determinant() * idet;
 
-				m.m41 = -Mat3(m21, m22, m23, m31, m32, m33, m41, m42, m43).determinant() * idet;
-				m.m42 = Mat3(m11, m12, m13, m31, m32, m33, m41, m42, m43).determinant() * idet;
-				m.m43 = -Mat3(m11, m12, m13, m21, m22, m23, m41, m42, m43).determinant() * idet;
-				m.m44 = Mat3(m11, m12, m13, m21, m22, m23, m31, m32, m33).determinant() * idet;
+				m.m41 = -Mat3(m21, m22, m23, m31, m32, m33, m41, m42, m43).Determinant() * idet;
+				m.m42 = Mat3(m11, m12, m13, m31, m32, m33, m41, m42, m43).Determinant() * idet;
+				m.m43 = -Mat3(m11, m12, m13, m21, m22, m23, m41, m42, m43).Determinant() * idet;
+				m.m44 = Mat3(m11, m12, m13, m21, m22, m23, m31, m32, m33).Determinant() * idet;
 			}
 			return m;
 		}

@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef SIMPLE_ENGINE_VECTOR_H
+#define SIMPLE_ENGINE_VECTOR_H
 
 #include <vector>
 #include <math.h>
@@ -9,98 +9,113 @@ namespace SimpleEngine {
 	class Vector3
 	{
 	public:
-		float _x;
-		float _y;
-		float _z;
+		float x;
+		float y;
+		float z;
 
-		Vector3() :_x(0), _y(0), _z(0)
+		Vector3() :x(0), y(0), z(0)
 		{}
 
-		Vector3(float __x, float __y, float __z) :_x(__x), _y(__y), _z(__z)
+		Vector3(float _x, float _y, float _z) :x(_x), y(_y), z(_z)
 		{}
 
 		Vector3 operator + (const Vector3& _other)
 		{
 			Vector3 result;
-			result._x = _x + _other._x;
-			result._y = _y + _other._y;
-			result._z = _z + _other._z;
+			result.x = x + _other.x;
+			result.y = y + _other.y;
+			result.z = z + _other.z;
 			return result;
 		}
 
 		Vector3& operator += (const Vector3& _other)
 		{
-			_x = _x + _other._x;
-			_y = _y + _other._y;
-			_z = _z + _other._z;
+			x = x + _other.x;
+			y = y + _other.y;
+			z = z + _other.z;
 			return *this;
 		}
 
 		Vector3 operator - (const Vector3& _other) const
 		{
 			Vector3 result;
-			result._x = _x - _other._x;
-			result._y = _y - _other._y;
-			result._z = _z - _other._z;
+			result.x = x - _other.x;
+			result.y = y - _other.y;
+			result.z = z - _other.z;
 			return result;
 		}
 
 		Vector3& operator -= (const Vector3& _other)
 		{
-			_x = _x - _other._x;
-			_y = _y - _other._y;
-			_z = _z - _other._z;
+			x = x - _other.x;
+			y = y - _other.y;
+			z = z - _other.z;
 			return *this;
 		}
 
 		float operator * (const Vector3& _other)
 		{
 			Vector3 result;
-			result._x = _x * _other._x;
-			result._y = _y * _other._y;
-			result._z = _z * _other._z;
-			return result._x + result._y + result._z;
+			result.x = x * _other.x;
+			result.y = y * _other.y;
+			result.z = z * _other.z;
+			return result.x + result.y + result.z;
 		}
 
 		Vector3 operator * (float _s)
 		{
 			Vector3 result;
-			result._x = _x * _s;
-			result._y = _y * _s;
-			result._z = _z * _s;
+			result.x = x * _s;
+			result.y = y * _s;
+			result.z = z * _s;
 			return result;
 		}
 
 		Vector3& operator *= (float _s)
 		{
-			_x = _x * _s;
-			_y = _y * _s;
-			_z = _z * _s;
+			x = x * _s;
+			y = y * _s;
+			z = z * _s;
 			return *this;
 		}
 
 		Vector3 cross(const Vector3& _other)
 		{
 			Vector3 result;
-			result._x = _y * _other._z - _z * _other._y;
-			result._y = _z * _other._x - _x * _other._z;
-			result._z = _x * _other._y - _y * _other._x;
+			result.x = y * _other.z - z * _other.y;
+			result.y = z * _other.x - x * _other.z;
+			result.z = x * _other.y - y * _other.x;
 			return result;
 		}
 
 		float Length() const
 		{
-			return sqrt(_x * _x + _y * _y + _z * _z);
+			return sqrt(x * x + y * y + z * z);
 		}
 
 		float LengthSqr() const
 		{
-			return _x * _x + _y * _y + _z * _z;
+			return x * x + y * y + z * z;
 		}
 
 		bool IsZero() const
 		{
-			return (_x == 0 && _y == 0 && _z == 0);
+			return abs(LengthSqr()) <= FLT_EPSILON;
+		}
+
+		void normalize()
+		{
+			do {
+				if (IsZero())
+					break;
+				float lenSqr = LengthSqr();
+				if (abs(lenSqr - 1) <= FLT_EPSILON)
+					break;
+				float len = sqrtf(lenSqr);
+				x /= len;
+				y /= len;
+				z /= len;
+			}while(0);
 		}
 
 		static void GramSchmidtOrthogonalization(std::vector<Vector3>& _basises)
