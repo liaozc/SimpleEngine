@@ -4,19 +4,59 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="math">
+    <Filter Include="Math">
       <UniqueIdentifier>{f805da30-7ae6-470d-bf38-e75429f193da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys">
+      <UniqueIdentifier>{c39ca9ca-a5c6-46c9-a299-80915419591f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\math\Quaternion.h">
-      <Filter>math</Filter>
+    <ClInclude Include="precompiled.h" />
+    <ClInclude Include="math\Math.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\math\Vector.h">
-      <Filter>math</Filter>
+    <ClInclude Include="math\Vector.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\math\Matrix.h">
-      <Filter>math</Filter>
+    <ClInclude Include="math\Angles.h">
+      <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="math\Rotation.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Quat.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\sys_public.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="math\Math.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Vector.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="precomiled.cpp" />
+    <ClCompile Include="math\Angles.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Rotation.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Quat.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleEngine.def" />
   </ItemGroup>
 </Project>

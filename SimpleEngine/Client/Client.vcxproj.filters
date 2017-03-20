@@ -4,6 +4,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\client\client.cpp" />
+    <ClCompile Include="client.cpp" />
   </ItemGroup>
 </Project>
