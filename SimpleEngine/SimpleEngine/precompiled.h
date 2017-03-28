@@ -17,3 +17,5 @@
 #include "math/Angles.h"
 #include "math/Rotation.h"
 #include "math/Quat.h"
+
+#include "IEngine.h"

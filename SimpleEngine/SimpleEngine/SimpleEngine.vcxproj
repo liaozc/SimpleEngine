@@ -153,6 +153,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IEngine.h" />
     <ClInclude Include="math\Angles.h" />
     <ClInclude Include="math\Math.h" />
     <ClInclude Include="math\Matrix.h" />
@@ -160,6 +161,10 @@
     <ClInclude Include="math\Rotation.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="precompiled.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SimpleEngine.h" />
+    <ClInclude Include="sys\IWndSys.h" />
+    <ClInclude Include="sys\WndSys_W32.h" />
     <ClInclude Include="sys\sys_public.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +186,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">precompiled.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="SimpleEngine.cpp" />
+    <ClCompile Include="sys\WndSys_W32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleEngine.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

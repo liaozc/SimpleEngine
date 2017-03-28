@@ -10,6 +10,18 @@
     <Filter Include="Sys">
       <UniqueIdentifier>{c39ca9ca-a5c6-46c9-a299-80915419591f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{3562908e-89c6-4929-af96-8273441f9bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\DX">
+      <UniqueIdentifier>{ab828030-c013-431b-b385-3c6309ba8ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGL">
+      <UniqueIdentifier>{beecee22-e863-4e67-a74b-9ad4955ff875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys\Res">
+      <UniqueIdentifier>{ffa4525f-6439-4030-937f-30565bb3d4ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompiled.h" />
@@ -34,6 +46,15 @@
     <ClInclude Include="sys\sys_public.h">
       <Filter>Sys</Filter>
     </ClInclude>
+    <ClInclude Include="IEngine.h" />
+    <ClInclude Include="SimpleEngine.h" />
+    <ClInclude Include="sys\IWndSys.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\WndSys_W32.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Math.cpp">
@@ -55,8 +76,20 @@
     <ClCompile Include="math\Matrix.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleEngine.cpp" />
+    <ClCompile Include="sys\WndSys_W32.cpp">
+      <Filter>Sys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleEngine.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Sys\Res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>
