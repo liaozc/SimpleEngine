@@ -9,6 +9,8 @@ public:
 	bool fullScreen;
 };
 
+class seRenderer;
+
 class seIEngine 
 {
 public:
@@ -16,6 +18,7 @@ public:
 	virtual void Close() = 0;
 	virtual void InitConfig(const seConfig& config) = 0;
 	virtual void Run() = 0;
+	virtual seRenderer* GetRenderer() const = 0;
 };
 
 DLL_INTERFACE seIEngine* GetSimpleEngine();

@@ -2,7 +2,8 @@
 #pragma hdrstop
 
 #include "SimpleEngine.h"
-#include "sys/IWndSys.h"
+#include "sys/sys_wnd_public.h"
+#include "renderer/render_public.h"
 
 seEngine * gEngine = nullptr;
 DLL_INTERFACE seIEngine* GetSimpleEngine()
@@ -16,7 +17,8 @@ DLL_INTERFACE seIEngine* GetSimpleEngine()
 
 seEngine::seEngine()
 {
-	mWndSys = nullptr;
+	mSysWnd = nullptr;
+	mRenderer = nullptr;
 }
 
 seEngine::~seEngine()
@@ -28,25 +30,35 @@ void seEngine::init()
 {
 	//create systems.
 	//1.window system
-	mWndSys = CreateWndSystem();
-
+	mSysWnd = CreateWndSystem();
+	//2.renderer
+	mRenderer = CreateRenderer();
 }
 
 void seEngine::Close()
 {
+	mRenderer->UnInit();
+	DelOBJ(mSysWnd);
+	DelOBJ(mRenderer);
 }
 
 void seEngine::InitConfig(const seConfig& config)
 {
-	mWndSys->CreateWnd(config);
+	mSysWnd->CreateWnd(config);
+	mRenderer->Init(mSysWnd);
 }
 
 void seEngine::Run()
 {
 	bool exit = false;
-	while (true) {
-		mWndSys->Run(exit);
-		if (exit)
-			break;
-	}
+	do {
+		mSysWnd->Run(exit);
+		mRenderer->DoRender();
+		BreakIf(exit);
+	} while (true);
+}
+
+seRenderer* seEngine::GetRenderer() const
+{
+	return mRenderer;
 }

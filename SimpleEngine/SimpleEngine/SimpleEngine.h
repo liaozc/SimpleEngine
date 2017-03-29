@@ -3,7 +3,8 @@
 
 #include "IEngine.h"
 
-class seIWndSys;
+class seSysWnd;
+class seRenderer;
 
 class seEngine :public seIEngine
 {
@@ -16,8 +17,10 @@ public:
 	virtual void Close();
 	virtual void InitConfig(const seConfig& config);
 	virtual void Run();
+	virtual seRenderer* GetRenderer() const;
 private:
-	seIWndSys* mWndSys;
+	seSysWnd* mSysWnd;
+	seRenderer* mRenderer;
 };
 
 #endif // ! SIMPLE_ENGINE_H

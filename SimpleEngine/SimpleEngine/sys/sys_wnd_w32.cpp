@@ -1,7 +1,7 @@
 #include "../precompiled.h"
 #pragma hdrstop
 
-#include "WndSys_W32.h"
+#include "sys_wnd_w32.h"
 #define IDI_ICON1 101
 #include <cstdio>
 
@@ -41,26 +41,26 @@ LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 
-seIWndSys* gWndSys = nullptr;
-seIWndSys* CreateWndSystem()
+seSysWnd* gSysWnd = nullptr;
+seSysWnd* CreateWndSystem()
 {
-	if (!gWndSys) {
-		gWndSys = new seWndSys_W32();
-		gWndSys->Init();
+	if (!gSysWnd) {
+		gSysWnd = new seSysWnd_W32();
+		gSysWnd->Init();
 	}
-	return gWndSys;
+	return gSysWnd;
 }
 
-seWndSys_W32::seWndSys_W32()
+seSysWnd_W32::seSysWnd_W32()
 {
 	mHwnd = 0;
 }
 
-seWndSys_W32::~seWndSys_W32()
+seSysWnd_W32::~seSysWnd_W32()
 {
 }
 
-void seWndSys_W32::Init()
+void seSysWnd_W32::Init()
 {
 	//register window
 	WNDCLASS wc;
@@ -83,7 +83,7 @@ void seWndSys_W32::Init()
 	printf("...registered window class\n");
 }
 
-void seWndSys_W32::CreateWnd(const seConfig& config)
+void seSysWnd_W32::CreateWnd(const seConfig& config)
 {
 	int				stylebits;
 	int				x, y, w, h;
@@ -131,7 +131,8 @@ void seWndSys_W32::CreateWnd(const seConfig& config)
 	if (!mHwnd) {
 		printf("^3GLW_CreateWindow() - Couldn't create window^0\n");
 	}
-
+	mWidth = config.screenWidth;
+	mHeight = config.screenHeight;
 	//::SetTimer(mHwnd, 0, 100, NULL);
 	ShowWindow(mHwnd, SW_SHOW);
 	UpdateWindow(mHwnd);
@@ -140,7 +141,7 @@ void seWndSys_W32::CreateWnd(const seConfig& config)
 //	SetFocus(mHwnd);
 }
 
-void seWndSys_W32::Run(bool& exit)
+void seSysWnd_W32::Run(bool& exit)
 {
 	MSG msg;
 	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -152,3 +153,5 @@ void seWndSys_W32::Run(bool& exit)
 		::DispatchMessage(&msg);
 	}
 }
+
+

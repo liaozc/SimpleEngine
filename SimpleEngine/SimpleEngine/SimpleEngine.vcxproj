@@ -76,6 +76,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_D</TargetName>
+    <IncludePath>$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -111,6 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>SimpleEngine.def</ModuleDefinitionFile>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;d3dx11d.lib;d3dx9d.lib;dxerr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -153,6 +156,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="geometry\DrawVert.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="math\Angles.h" />
     <ClInclude Include="math\Math.h" />
@@ -161,13 +165,19 @@
     <ClInclude Include="math\Rotation.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="precompiled.h" />
+    <ClInclude Include="renderer\dx11\dx_header.h" />
+    <ClInclude Include="renderer\dx11\Program.h" />
+    <ClInclude Include="renderer\dx11\ProgramSource.h" />
+    <ClInclude Include="renderer\dx11\renderer_dx11.h" />
+    <ClInclude Include="renderer\render_public.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SimpleEngine.h" />
-    <ClInclude Include="sys\IWndSys.h" />
-    <ClInclude Include="sys\WndSys_W32.h" />
+    <ClInclude Include="sys\sys_wnd_public.h" />
+    <ClInclude Include="sys\sys_wnd_w32.h" />
     <ClInclude Include="sys\sys_public.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="geometry\DrawVert.cpp" />
     <ClCompile Include="math\Angles.cpp" />
     <ClCompile Include="math\Math.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -186,8 +196,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">precompiled.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="renderer\dx11\Program.cpp" />
+    <ClCompile Include="renderer\dx11\ProgramSource.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="renderer\dx11\renderer_dx11.cpp" />
     <ClCompile Include="SimpleEngine.cpp" />
-    <ClCompile Include="sys\WndSys_W32.cpp" />
+    <ClCompile Include="sys\sys_wnd_w32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleEngine.def" />

@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <math.h>
 #include <string.h>
+#include <cstdio>
 
 
 #pragma warning(disable : 4100)				// unreferenced formal parameter
@@ -19,3 +20,4 @@
 #include "math/Quat.h"
 
 #include "IEngine.h"
+#include "renderer/render_public.h"

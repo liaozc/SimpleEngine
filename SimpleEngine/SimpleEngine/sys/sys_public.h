@@ -20,11 +20,18 @@
 #endif
 
 typedef unsigned int			dword;		// 32 bits
+typedef unsigned char			byte;		// 8 bits
 
 #ifdef INSIDE_ENGINE
 #define DLL_INTERFACE __declspec( dllexport )
 #else
 #define DLL_INTERFACE __declspec(dllimport)
 #endif
+
+#define BreakIf(condition)	if(condition) break;
+#define ReturnIf(condition)	if(condition) return;
+#define ReturnValIf(condition,val)	if(condition) return val;
+#define ReleaseOBJ(obj)	if(obj){ obj->Release(); obj = nullptr;}
+#define DelOBJ(obj)	if(obj){ delete obj; obj = nullptr;}
 
 #endif
