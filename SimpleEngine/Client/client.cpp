@@ -7,7 +7,7 @@
 int waitForInput()
 {
 	printf("engine has quit.!\n");
-	system("pause");
+//	system("pause");
 	return 0;
 }
 

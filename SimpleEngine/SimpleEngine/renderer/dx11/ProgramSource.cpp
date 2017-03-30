@@ -1,8 +1,10 @@
 #include "ProgramSource.h"
 
-extern char* pSrc_Flat = 
-#include "Flat_Program.h"
+extern const char* pSrc_Flat =
+#include "Flat_Program.hlsl"
 
+extern const char* pSrc_Simple3D =
+#include "Simple_3D.hlsl"
 
 
 

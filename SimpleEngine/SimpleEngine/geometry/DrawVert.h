@@ -4,6 +4,7 @@
 class seDrawVert {
 public:
 	seVec3			xyz;
+	seVec4			color;	//TODO: how to make it byte type each component as showed below
 /*
 	seVec2			st;
 	seVec3			normal;

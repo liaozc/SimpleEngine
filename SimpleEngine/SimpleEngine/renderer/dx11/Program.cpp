@@ -17,7 +17,7 @@ seProgram::~seProgram()
 	ReleaseOBJ(mPS);
 }
 	
-bool seProgram::FromSource(const char* src)
+bool seProgram::FromSource(const char* src,D3D11_INPUT_ELEMENT_DESC layout[],int numLayout)
 {
 	ID3DBlob* pVSBlob = NULL;
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
@@ -58,12 +58,7 @@ bool seProgram::FromSource(const char* src)
 		printf("compiling VS fails at line :%d\n", __LINE__);
 		return false;
 	}
-	// Create the input layout
-	D3D11_INPUT_ELEMENT_DESC layout[] =	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	};
-	UINT numElements = ARRAYSIZE(layout);
-	hr = mDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),pVSBlob->GetBufferSize(), &mLayout);
+	hr = mDevice->CreateInputLayout(layout, numLayout, pVSBlob->GetBufferPointer(),pVSBlob->GetBufferSize(), &mLayout);
 	pVSBlob->Release();
 	if (FAILED(hr)) {
 		printf("creating Input layout fails at line :%d\n", __LINE__);
@@ -95,9 +90,13 @@ bool seProgram::FromSource(const char* src)
 	return true;
 }
 
-void seProgram::Apply(ID3D11DeviceContext* context)
+void seProgram::Apply(ID3D11DeviceContext* context, ID3D11Buffer* vsCB, ID3D11Buffer* psCB)
 {
 	context->IASetInputLayout(mLayout);
 	context->VSSetShader(mVS,NULL,0);
+	if(vsCB)
+		context->VSSetConstantBuffers(0, 1, &vsCB);
 	context->PSSetShader(mPS, NULL, 0);
+	if(psCB)
+		context->PSSetConstantBuffers(0, 1, &psCB);
 }
