@@ -144,10 +144,10 @@ void seRenderer_Dx11::Init(seSysWnd* sysWnd)
 	testPro->FromSource(pSrc_Simple3D,layout,numElements);
 	
 	seDrawVert vertices[] = {
-		{ seVec3(-1.0f, -1.0f, 0), seVec4(0.0f, 0.0f, 1.0f, 1.0f) },
-		{ seVec3(1.0f, 1.0f, 0), seVec4(0.0f, 1.0f, 0.0f, 1.0f) },
+		{ seVec3(-1.0f, 1.0f, -1.0f), seVec4(0.0f, 0.0f, 1.0f, 1.0f) },
+		{ seVec3(1.0f, 1.0f, -1.0f), seVec4(0.0f, 1.0f, 0.0f, 1.0f) },
 		{ seVec3(1.0f, 1.0f, 1.0f), seVec4(0.0f, 1.0f, 1.0f, 1.0f) },
-		{ seVec3(-1.0f, 1.0f, 0), seVec4(1.0f, 0.0f, 0.0f, 1.0f) },
+		{ seVec3(-1.0f, 1.0f, 1.0f), seVec4(1.0f, 0.0f, 0.0f, 1.0f) },
 		{ seVec3(-1.0f, -1.0f, -1.0f), seVec4(1.0f, 0.0f, 1.0f, 1.0f) },
 		{ seVec3(1.0f, -1.0f, -1.0f), seVec4(1.0f, 1.0f, 0.0f, 1.0f) },
 		{ seVec3(1.0f, -1.0f, 1.0f), seVec4(1.0f, 1.0f, 1.0f, 1.0f) },
@@ -202,7 +202,7 @@ void seRenderer_Dx11::Init(seSysWnd* sysWnd)
 	testWorld = XMMatrixIdentity();
 
 	// Initialize the view matrix
-	XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+	XMVECTOR Eye = XMVectorSet(0.0f, 2.0f, -5.0f, 0.0f);
 	XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	testView = XMMatrixLookAtLH(Eye, At, Up);
@@ -241,12 +241,12 @@ void seRenderer_Dx11::DoRender()
 	if (dwTimeStart == 0)
 		dwTimeStart = dwTimeCur;
 	t = (dwTimeCur - dwTimeStart) / 1000.0f;
-	//testWorld = XMMatrixRotationY(t);
+	testWorld = XMMatrixRotationY(t);
 	// Update variables
 	ConstantBuffer cb;
-	cb.mWorld = XMMatrixTranspose(testWorld);
-	cb.mView = XMMatrixTranspose(testView);
-	cb.mProjection = XMMatrixTranspose(testProjection);
+	cb.mWorld = testWorld;
+	cb.mView = testView;
+	cb.mProjection = testProjection;
 	mContext->UpdateSubresource(testConstantBuffer, 0, NULL, &cb, 0, 0);
 
 	testPro->Apply(mContext, testConstantBuffer, NULL);
