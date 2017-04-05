@@ -13,6 +13,7 @@ public:
 	virtual void Init(seSysWnd* sysWnd) = 0;
 	virtual void UnInit() = 0;
 	virtual void DoRender() = 0;
+	virtual void OnSize(int width, int height) = 0;
 };
 
 seRenderer* CreateRenderer();

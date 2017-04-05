@@ -21,14 +21,14 @@ int main()
 		bool equal = rMat3 == qMat3;
 	}
 
-	seIEngine* gEngine = nullptr;
+	seEngine* gEngine = nullptr;
 	{//test simple renderer
 		//1.get the engine
 		gEngine = GetSimpleEngine();
 		//2.config and init.
 		seConfig config;
-		config.screenHeight = 640;
-		config.screenWidth = 960;
+		config.screenHeight = 480;
+		config.screenWidth = 640;
 		config.fullScreen = false;
 		gEngine->InitConfig(config);
 		//3.update the msg loop

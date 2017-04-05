@@ -19,5 +19,5 @@
 #include "math/Rotation.h"
 #include "math/Quat.h"
 
-#include "IEngine.h"
+#include "engine_public.h"
 #include "renderer/render_public.h"

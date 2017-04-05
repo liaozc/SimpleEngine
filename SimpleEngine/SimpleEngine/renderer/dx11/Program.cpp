@@ -2,7 +2,7 @@
 #pragma hdrstop
 
 #include "dx_header.h"
-#include "Program.h"
+#include "program.h"
 
 seProgram::seProgram(ID3D11Device* device)
 {
@@ -46,16 +46,11 @@ bool seProgram::FromSource(const char* src,D3D11_INPUT_ELEMENT_DESC layout[],int
 		return false;
 	}
 
-	if (pErrorBlob) {
-		pErrorBlob->Release();
-		printf("compiling VS fails at line :%d\n",__LINE__);
-		return false;
-	}	
 	// Create the vertex shader
 	hr = mDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, &mVS);
 	if (FAILED(hr)){
 		pVSBlob->Release();
-		printf("compiling VS fails at line :%d\n", __LINE__);
+		printf("creating vs faild at %d\n", __LINE__);
 		return false;
 	}
 	hr = mDevice->CreateInputLayout(layout, numLayout, pVSBlob->GetBufferPointer(),pVSBlob->GetBufferSize(), &mLayout);
@@ -76,7 +71,10 @@ bool seProgram::FromSource(const char* src,D3D11_INPUT_ELEMENT_DESC layout[],int
 		NULL, NULL,
 		&pPSBlob, &pErrorBlob, NULL);
 	if (FAILED(hr))	{
-		printf("compiling PS fails at line :%d\n", __LINE__);
+		if (pErrorBlob) {
+			printf("compiling PS fails at line :%d for: %s \n", __LINE__, (char*)pErrorBlob->GetBufferPointer());
+			pErrorBlob->Release();
+		}
 		return false;
 	}
 	// Create the pixel shader

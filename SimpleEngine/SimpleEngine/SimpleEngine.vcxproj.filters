@@ -25,6 +25,9 @@
     <Filter Include="Renderer\opengl">
       <UniqueIdentifier>{beecee22-e863-4e67-a74b-9ad4955ff875}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\dx11\samples">
+      <UniqueIdentifier>{422e0145-d1b4-4622-8547-21bfcdcaa08c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompiled.h" />
@@ -49,8 +52,6 @@
     <ClInclude Include="sys\sys_public.h">
       <Filter>Sys</Filter>
     </ClInclude>
-    <ClInclude Include="IEngine.h" />
-    <ClInclude Include="SimpleEngine.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sys\sys_wnd_public.h">
       <Filter>Sys</Filter>
@@ -67,15 +68,33 @@
     <ClInclude Include="renderer\dx11\renderer_dx11.h">
       <Filter>Renderer\dx11</Filter>
     </ClInclude>
-    <ClInclude Include="renderer\dx11\ProgramSource.h">
-      <Filter>Renderer\dx11</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer\dx11\Program.h">
-      <Filter>Renderer\dx11</Filter>
-    </ClInclude>
     <ClInclude Include="renderer\dx11\dx_header.h">
       <Filter>Renderer\dx11</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\dx11\sample_public.h">
+      <Filter>Renderer\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\sample_basic_shader.h">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\program.h">
+      <Filter>Renderer\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\programSource.h">
+      <Filter>Renderer\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\sample_simple_3d.h">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\sample_transformation.h">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\dx11\sample_lighting.h">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="inuptEventSystem.h" />
+    <ClInclude Include="engine_public.h" />
+    <ClInclude Include="engine_simple.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Math.cpp">
@@ -97,7 +116,6 @@
     <ClCompile Include="math\Matrix.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleEngine.cpp" />
     <ClCompile Include="sys\sys_wnd_w32.cpp">
       <Filter>Sys</Filter>
     </ClCompile>
@@ -107,12 +125,26 @@
     <ClCompile Include="renderer\dx11\renderer_dx11.cpp">
       <Filter>Renderer\dx11</Filter>
     </ClCompile>
-    <ClCompile Include="renderer\dx11\ProgramSource.cpp">
+    <ClCompile Include="renderer\dx11\sample_basic_shader.cpp">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\dx11\programSource.cpp">
       <Filter>Renderer\dx11</Filter>
     </ClCompile>
-    <ClCompile Include="renderer\dx11\Program.cpp">
+    <ClCompile Include="renderer\dx11\program.cpp">
       <Filter>Renderer\dx11</Filter>
     </ClCompile>
+    <ClCompile Include="renderer\dx11\sample_simple_3d.cpp">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\dx11\sample_transformation.cpp">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\dx11\sample_lighting.cpp">
+      <Filter>Renderer\dx11\samples</Filter>
+    </ClCompile>
+    <ClCompile Include="inputEventSystem.cpp" />
+    <ClCompile Include="engine_simple.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleEngine.def" />
@@ -123,6 +155,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
+    <Image Include="icon1.ico">
+      <Filter>Sys\Res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -157,7 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometry\DrawVert.h" />
-    <ClInclude Include="IEngine.h" />
+    <ClInclude Include="engine_public.h" />
+    <ClInclude Include="inuptEventSystem.h" />
     <ClInclude Include="math\Angles.h" />
     <ClInclude Include="math\Math.h" />
     <ClInclude Include="math\Matrix.h" />
@@ -166,18 +167,24 @@
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="precompiled.h" />
     <ClInclude Include="renderer\dx11\dx_header.h" />
-    <ClInclude Include="renderer\dx11\Program.h" />
-    <ClInclude Include="renderer\dx11\ProgramSource.h" />
+    <ClInclude Include="renderer\dx11\program.h" />
+    <ClInclude Include="renderer\dx11\programSource.h" />
     <ClInclude Include="renderer\dx11\renderer_dx11.h" />
+    <ClInclude Include="renderer\dx11\sample_basic_shader.h" />
+    <ClInclude Include="renderer\dx11\sample_lighting.h" />
+    <ClInclude Include="renderer\dx11\sample_public.h" />
+    <ClInclude Include="renderer\dx11\sample_simple_3d.h" />
+    <ClInclude Include="renderer\dx11\sample_transformation.h" />
     <ClInclude Include="renderer\render_public.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="SimpleEngine.h" />
+    <ClInclude Include="engine_simple.h" />
     <ClInclude Include="sys\sys_wnd_public.h" />
     <ClInclude Include="sys\sys_wnd_w32.h" />
     <ClInclude Include="sys\sys_public.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="geometry\DrawVert.cpp" />
+    <ClCompile Include="inputEventSystem.cpp" />
     <ClCompile Include="math\Angles.cpp" />
     <ClCompile Include="math\Math.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -196,12 +203,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">precompiled.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="renderer\dx11\Program.cpp" />
-    <ClCompile Include="renderer\dx11\ProgramSource.cpp">
+    <ClCompile Include="renderer\dx11\program.cpp" />
+    <ClCompile Include="renderer\dx11\programSource.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="renderer\dx11\renderer_dx11.cpp" />
-    <ClCompile Include="SimpleEngine.cpp" />
+    <ClCompile Include="renderer\dx11\sample_basic_shader.cpp" />
+    <ClCompile Include="renderer\dx11\sample_lighting.cpp" />
+    <ClCompile Include="renderer\dx11\sample_simple_3d.cpp" />
+    <ClCompile Include="renderer\dx11\sample_transformation.cpp" />
+    <ClCompile Include="engine_simple.cpp" />
     <ClCompile Include="sys\sys_wnd_w32.cpp" />
   </ItemGroup>
   <ItemGroup>

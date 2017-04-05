@@ -5,11 +5,22 @@
 #define IDI_ICON1 101
 #include <cstdio>
 
+#include "../inuptEventSystem.h"
+seInputEventSystem* gInputEventSys = nullptr;
+
 LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 #if 1
 	switch (uMsg) {
 		case WM_DESTROY: {
 			PostMessage(0, WM_QUIT, 0, 0);
+			break;
+		}
+		case WM_SIZE: {
+			seInputPackage ipack;
+			ipack.msg = EventType_Size;
+			ipack.param[0] = LOWORD(lParam);
+			ipack.param[1] = HIWORD(lParam);
+			gInputEventSys ? gInputEventSys->OnMsg(ipack) : 0;
 			break;
 		}
 		case WM_WINDOWPOSCHANGED:
@@ -33,7 +44,7 @@ LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 		case WM_MBUTTONDOWN:
 		case WM_MBUTTONUP:
 		case WM_MOUSEMOVE: 
-		case WM_MOUSEWHEEL: 
+		case WM_MOUSEWHEEL:
 				break;
 	}
 #endif
@@ -42,11 +53,11 @@ LONG WINAPI MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 
 seSysWnd* gSysWnd = nullptr;
-seSysWnd* CreateWndSystem()
+seSysWnd* CreateSysWnd(seInputEventSystem* iEventSys)
 {
 	if (!gSysWnd) {
 		gSysWnd = new seSysWnd_W32();
-		gSysWnd->Init();
+		gSysWnd->Init(iEventSys);
 	}
 	return gSysWnd;
 }
@@ -60,8 +71,9 @@ seSysWnd_W32::~seSysWnd_W32()
 {
 }
 
-void seSysWnd_W32::Init()
+void seSysWnd_W32::Init(seInputEventSystem* iEventSys)
 {
+	gInputEventSys = iEventSys;
 	//register window
 	WNDCLASS wc;
 	memset(&wc, 0, sizeof(wc));

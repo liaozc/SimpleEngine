@@ -5,11 +5,11 @@
 
 class seSysWnd_W32 : public seSysWnd
 {
-	friend seSysWnd* CreateWndSystem();
+	friend seSysWnd* CreateSysWnd(seInputEventSystem* iEventSys);
 	seSysWnd_W32();
 	virtual ~seSysWnd_W32();
 public:
-	virtual void Init();
+	virtual void Init(seInputEventSystem* iEventSys);
 	virtual void Run(bool& exit);
 	virtual void CreateWnd(const seConfig& config);
 	virtual WindowHandle GetHandle() const { return mHwnd; }
