@@ -25,8 +25,7 @@ void seSample_Transformation::Init(ID3D11Device* device, ID3D11DeviceContext* co
 {
 	seSample::Init(device, context);
 	
-	D3D11_INPUT_ELEMENT_DESC layout[] =
-	{
+	D3D11_INPUT_ELEMENT_DESC layout[] =	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
@@ -136,7 +135,8 @@ void seSample_Transformation::Render()
 	//
 	// Render the first cube
 	//
-	mProgram->Apply(mContext,mCB,NULL);
+	mProgram->Apply(mContext);
+	mProgram->UpdateVSConstantBuffer(mContext, mCB, 0);
 	
 	UINT stride = sizeof(seDrawVert);
 	UINT offset = 0;

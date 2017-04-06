@@ -10,12 +10,13 @@
 #include "sample_simple_3d.h"
 #include "sample_transformation.h"
 #include "sample_lighting.h"
+#include "sample_texture.h"
 
 #define SAMPLE_BASIC_SHADER 	0
 #define SAMPLE_SIMPLE_3D	0
 #define SAMPLE_TRANSFORMATION	0
-#define SAMPLE_LIGHTING	1
-#define SAMPLE_TEXTURE 0
+#define SAMPLE_LIGHTING	0
+#define SAMPLE_TEXTURE 1
 
 seSample* sample = nullptr;
 
@@ -134,6 +135,8 @@ void seRenderer_Dx11::Init(seSysWnd* sysWnd)
 	sample = new seSample_Transformation();
 #elif SAMPLE_LIGHTING == 1
 	sample = new seSample_Lighting();
+#elif SAMPLE_TEXTURE == 1
+	sample = new seSample_Texture();
 #endif
 	sample->Init(mDevice, mContext);
 

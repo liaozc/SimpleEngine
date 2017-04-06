@@ -182,7 +182,9 @@ void seSample_Lighting::Render()
 	cb.vLightColor[1] = vLightColors[1];
 	mContext->UpdateSubresource(mCB, 0, NULL, &cb, 0, 0);
 	
-	mProgram->Apply(mContext, mCB, mCB);
+	mProgram->Apply(mContext);
+	mProgram->UpdateVSConstantBuffer(mContext,mCB,0);
+	mProgram->UpdatePSConstantBuffer(mContext, mCB, 0);
 
 	UINT stride = sizeof(seDrawVert);
 	UINT offset = 0;
@@ -198,7 +200,9 @@ void seSample_Lighting::Render()
 	cbl.mat_world = mat_world;
 	cbl.mat_view = mat_view;
 	cbl.mat_proj = mat_proj;
-	mProgramLight->Apply(mContext, mCBLight, mCBLight);
+	mProgramLight->Apply(mContext);
+	mProgramLight->UpdateVSConstantBuffer(mContext, mCBLight, 0);
+	mProgramLight->UpdatePSConstantBuffer(mContext, mCBLight, 0);
 	for( int m = 0; m < 2; m++ ){
 		XMMATRIX mat_light = XMMatrixTranslationFromVector( 5.0f * XMLoadFloat4( &vLightDirs[m] ) );
 		XMMATRIX mat_lightScale = XMMatrixScaling( 0.2f, 0.2f, 0.2f );

@@ -118,7 +118,8 @@ void seSample_Simple3D::Render()
 	cb.mat_proj = mat_proj;
 	mContext->UpdateSubresource(mCB, 0, NULL, &cb, 0, 0);
 
-	mProgram->Apply(mContext,mCB, NULL);
+	mProgram->Apply(mContext);
+	mProgram->UpdateVSConstantBuffer(mContext, mCB, 0);
 
 	UINT stride = sizeof(seDrawVert);
 	UINT offset = 0;

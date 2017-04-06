@@ -11,5 +11,7 @@ extern const char* pSrc_Lighting;
 
 extern const char* pSrc_LightingSolid;
 
+extern const char* pSrc_Texture;
+
 #endif // !PROGRAM_SOURCE_H
 

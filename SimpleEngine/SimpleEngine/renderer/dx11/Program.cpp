@@ -88,13 +88,30 @@ bool seProgram::FromSource(const char* src,D3D11_INPUT_ELEMENT_DESC layout[],int
 	return true;
 }
 
-void seProgram::Apply(ID3D11DeviceContext* context, ID3D11Buffer* vsCB, ID3D11Buffer* psCB)
+void seProgram::Apply(ID3D11DeviceContext* context)
 {
 	context->IASetInputLayout(mLayout);
-	context->VSSetShader(mVS,NULL,0);
-	if(vsCB)
-		context->VSSetConstantBuffers(0, 1, &vsCB);
+	context->VSSetShader(mVS,NULL,0);	
 	context->PSSetShader(mPS, NULL, 0);
-	if(psCB)
-		context->PSSetConstantBuffers(0, 1, &psCB);
 }
+
+void seProgram::UpdateVSConstantBuffer(ID3D11DeviceContext* context, ID3D11Buffer* vsCB, UINT slot)
+{
+	context->VSSetConstantBuffers(slot,1,&vsCB);
+}
+
+void seProgram::UpdatePSConstantBuffer(ID3D11DeviceContext* context, ID3D11Buffer* psCB, UINT slot)
+{
+	context->PSSetConstantBuffers(slot, 1, &psCB);
+}
+
+void seProgram::UpdatePSTexture(ID3D11DeviceContext* context, ID3D11ShaderResourceView* tex, UINT slot)
+{
+	context->PSSetShaderResources(slot, 1, &tex);
+}
+
+void seProgram::UpdatePSSampleState(ID3D11DeviceContext* context, ID3D11SamplerState* sampleState, UINT slot)
+{
+	context->PSSetSamplers(slot, 1, &sampleState);
+}
+

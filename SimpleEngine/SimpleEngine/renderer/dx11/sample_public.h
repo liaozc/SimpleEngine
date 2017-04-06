@@ -4,6 +4,8 @@
 struct ID3D11DeviceContext;
 struct ID3D11Device;
 struct ID3D11Buffer;
+struct ID3D11ShaderResourceView;
+struct ID3D11SamplerState;
 class  seProgram;
 
 class seSample

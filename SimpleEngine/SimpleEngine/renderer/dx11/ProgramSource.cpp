@@ -14,3 +14,6 @@ extern const char* pSrc_Lighting =
 
 extern const char* pSrc_LightingSolid = 
 #include "Lighting_Solid.hlsl"
+
+extern const char* pSrc_Texture = 
+#include "Texture.hlsl"

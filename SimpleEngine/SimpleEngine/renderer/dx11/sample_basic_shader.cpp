@@ -45,7 +45,7 @@ void seSample_BasicShader::Render()
 	UINT offset = 0;
 	mContext->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 
-	mProgram->Apply(mContext, NULL, NULL);
+	mProgram->Apply(mContext);
 	mContext->Draw(3, 0);
 }
 
